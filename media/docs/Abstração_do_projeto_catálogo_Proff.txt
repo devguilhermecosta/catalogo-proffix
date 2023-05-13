@@ -1,0 +1,34 @@
+Abstração do projeto catálogo Proffix
+
+font-familly: https://fonts.google.com/specimen/Oswald?category=Sans+Serif
+
+Models:
+	** APP PRODUCTS
+	- Category:
+		* name
+		* slug
+
+	- Product:
+		* title
+		* category -> foreingkey with Category
+		* slug
+		* cover
+		* description
+		* available
+		
+	- Image:
+		* product -> foreingkey with Product
+		* cover
+
+
+	** APP Contact
+	- Information
+		* about
+		* phone_number
+		* fax_number
+		* email
+
+	- Docs
+		* afe
+		* cnpj
+		* crt
