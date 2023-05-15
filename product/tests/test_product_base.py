@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
 from product.models import Category, Product, Image
 
@@ -6,9 +6,20 @@ from .product_test_base import (make_category, make_image, make_product,
                                 make_product_range,
                                 make_image_range,
                                 )
+import shutil
+import contextlib
 
 
+TEST_DIR = 'test_data'
+
+
+@override_settings(MEDIA_ROOT=(TEST_DIR + '/media'))
 class ProductBaseTests(TestCase):
+    def tearDown(self) -> None:
+        with contextlib.suppress(OSError):
+            shutil.rmtree(TEST_DIR)
+        return super().tearDown()
+
     def test_func_make_category_returs_correct_data(self) -> None:
         category = make_category()
         self.assertEqual(
@@ -54,4 +65,3 @@ class ProductBaseTests(TestCase):
         num_of_images: int = len(Image.objects.all())
 
         self.assertEqual(num_of_images, 5)
-        self.fail('CONTINUAR AQUI')
