@@ -27,7 +27,7 @@ class Product(models.Model):
                             unique=True,
                             default='',
                             )
-    cover = models.ImageField(upload_to=f'media/{category.name}/',
+    cover = models.ImageField(upload_to='images-products/',
                               blank=True,
                               null=True,
                               verbose_name='imagem de apresentação',
@@ -52,7 +52,7 @@ class Product(models.Model):
 
 class Image(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    cover = models.ImageField(upload_to='media/images-products/',
+    cover = models.ImageField(upload_to='images-products/',
                               blank=True,
                               null=True,
                               verbose_name='imagens do produto'

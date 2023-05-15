@@ -14,12 +14,13 @@
 
   <!-- main -->
   <main class="C-main">
+    {% block content %}{% endblock content %}
   </main>
 
   <!-- footer -->
   <footer class="C-footer"></footer>
 
   <!-- script js -->
-  <script></script>
+  <script src="{% static 'global/js/script.js' %}"></script>
 </body>
 </html>

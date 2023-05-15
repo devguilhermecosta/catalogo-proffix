@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.urls import reverse, resolve, ResolverMatch
 from django.http import HttpResponse
 from product.views import ProductList
+from .product_test_base import make_product_range
 
 
 class ProductTests(TestCase):
@@ -9,6 +10,13 @@ class ProductTests(TestCase):
         url: str = '/'
 
         self.assertEqual(url, reverse('product:products'))
+
+    def test_product_url_status_code_200(self) -> None:
+        response: HttpResponse = self.client.get(
+            reverse('product:products')
+        )
+
+        self.assertEqual(response.status_code, 200)
 
     def test_products_load_correct_view(self) -> None:
         url: str = reverse('product:products')
@@ -23,4 +31,14 @@ class ProductTests(TestCase):
         self.assertTemplateUsed(response, 'product/pages/products.html')
 
     def test_products_load_correct_context_data(self) -> None:
-        pass
+        make_product_range(3)
+
+        response: HttpResponse = self.client.get(
+            reverse('product:products')
+        )
+
+        content: str = response.content.decode('utf-8')
+
+        self.assertIn('name of product 0', content)
+        self.assertIn('name of product 1', content)
+        self.assertIn('name of product 2', content)

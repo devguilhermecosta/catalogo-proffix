@@ -72,7 +72,7 @@ def make_image(**kwargs) -> Image:
     image_data: dict = {
         'product': make_product(
                 name=kwargs.pop('product_name', 'product name'),
-                slug=kwargs.pop('product_slug', 'produc-slug')
+                slug=kwargs.pop('product_slug', 'product-slug')
             ),
         'cover': __create_simple_image()
     }
