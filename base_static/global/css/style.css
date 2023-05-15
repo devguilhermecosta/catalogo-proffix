@@ -140,6 +140,8 @@ html, body {
 }
 /* end header */
 
+
+/* start main */
 .C-main {
   grid-area: main;
 }
@@ -152,10 +154,10 @@ html, body {
   padding: 10px;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: center;
   align-items: stretch;
   row-gap: 30px;
-  column-gap: 5px;
+  column-gap: 10px;
 }
 
 .C-product {
@@ -163,8 +165,9 @@ html, body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  flex-grow: 3;
   flex-shrink: 3;
-  flex-basis: 45%;
+  flex-basis: 50%;
   width: 100%;
   max-width: 280px;
   height: auto;
@@ -338,6 +341,27 @@ html, body {
 .C-detail_link:hover {
   opacity: 0.8;
 }
+/* end main */
+
+/* start footer */
+.C-footer {
+  background-color: var(--red_one);
+  color: var(--white);
+  text-align: center;
+  padding: 2px 5px;
+}
+
+.C-footer p {
+  font-size: 12px;
+  font-weight: 400;
+  padding: 3px;
+}
+
+.C-footer p:not(:last-child) {
+  text-transform: capitalize;
+}
+
+/* end footer */
 
 @keyframes menu-mobile {
   from {
@@ -354,6 +378,23 @@ html, body {
 @keyframes open-menu {
   from {width: 0}
   to {width: 50%;}
+}
+
+@media screen and (min-width: 400px) {
+  .C-products {
+    justify-content: flex-start;
+  }
+
+  .C-product {
+    flex-basis: 30%;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .C-logo {
+    max-width: 150px;
+  }
+  
 }
 
 @media screen and (min-width: 840px) {

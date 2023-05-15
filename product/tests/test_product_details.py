@@ -1,4 +1,4 @@
-from django.http import Http404, HttpResponse
+from django.http import HttpResponse
 from django.test import TestCase
 from django.urls import ResolverMatch, resolve, reverse
 from product.tests.product_test_base import make_image
@@ -65,10 +65,6 @@ class ProductDetailsTests(TestCase):
         )
 
         self.assertEqual(response.status_code, 404)
-
-
-"""
-testar a renderização de produtos não available
-testar a renderização de imagens que não estão atreladas
-ao produto carregado
-"""
+        self.fail('testar a renderização de produtos não available '
+                  'testar a renderização de imagens que não estão atreladas '
+                  'ao produto carregado')
