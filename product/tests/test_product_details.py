@@ -1,17 +1,25 @@
 from django.http import HttpResponse
 from django.test import TestCase
+from django.test import override_settings
 from django.urls import ResolverMatch, resolve, reverse
 from product.tests.product_test_base import make_image
 from product.models import Image
-
 from product import views
-
 from .product_test_base import make_product
+import shutil
+import contextlib
 
 
+TEST_DIR = 'test_data'
+
+
+@override_settings(MEDIA_ROOT=(TEST_DIR + '/media'))
 class ProductDetailsTests(TestCase):
     def setUp(self):
         make_product()
+
+        with contextlib.suppress(OSError):
+            shutil.rmtree(TEST_DIR)
         return super().setUp()
 
     def test_product_details_url_is_correct(self) -> None:

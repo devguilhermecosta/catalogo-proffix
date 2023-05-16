@@ -1,11 +1,23 @@
 from django.test import TestCase
+from django.test import override_settings
 from django.urls import reverse, resolve, ResolverMatch
 from django.http import HttpResponse
 from product.views import ProductList
 from .product_test_base import make_product_range
+import shutil
+import contextlib
 
 
+TEST_DIR = 'test_data'
+
+
+@override_settings(MEDIA_ROOT=(TEST_DIR + '/media'))
 class ProductTests(TestCase):
+    def setUp(self):
+        with contextlib.suppress(OSError):
+            shutil.rmtree(TEST_DIR)
+        return super().setUp()
+
     def test_products_url_is_correct(self) -> None:
         url: str = '/'
 
