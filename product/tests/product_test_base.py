@@ -7,7 +7,9 @@ from pathlib import Path
 def __create_simple_image() -> SimpleUploadedFile:
     try:
         path: Path = Path(__file__).parent.parent.parent
-        image_path: str = ''.join([str(path), '/utils/tests/images/image_test.jpeg'])
+        image_path: str = ''.join(
+            [str(path), '/utils/tests/images/image_test.jpeg']
+            )
         simple_image: SimpleUploadedFile = SimpleUploadedFile(
             name='image_test',
             content=open(image_path, 'rb').read(),
@@ -33,7 +35,7 @@ def make_product(category=None, **kwargs) -> Product:
 
     Args:
         category = optional instance of category,
-        optional kwargs = name, slug, description
+        optional kwargs = name, slug, description, available
 
     Returns:
         Product
@@ -44,7 +46,7 @@ def make_product(category=None, **kwargs) -> Product:
         'slug': kwargs.pop('slug', 'product-slug'),
         'cover': __create_simple_image(),
         'description': kwargs.pop('description', 'product description'),
-        'available': True,
+        'available': kwargs.pop('available', True),
     }
     new_product = Product.objects.create(**product_data)
 
@@ -65,15 +67,15 @@ def make_product_range(number_of_objects: int):
         )
 
 
-def make_image(**kwargs) -> Image:
+def make_image(product=None, **kwargs) -> Image:
     """
         optional: product_name, product_slug
     """
     image_data: dict = {
         'product': make_product(
-                name=kwargs.pop('product_name', 'product name'),
-                slug=kwargs.pop('product_slug', 'product-slug')
-            ),
+            name=kwargs.pop('product_name', 'product name'),
+            slug=kwargs.pop('product_slug', 'product-slug')
+            ) if product is None else product,
         'cover': __create_simple_image()
     }
     new_image = Image.objects.create(**image_data)

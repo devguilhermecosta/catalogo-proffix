@@ -36,7 +36,7 @@ class ProductBaseTests(TestCase):
 
     def test_func_product_returs_correct_data(self) -> None:
         product = make_product()
-        product_cover_name = product.cover.name[11:21]
+        product_cover_name = product.cover.name[16:]
 
         self.assertEqual(product.name, 'product name')
         self.assertEqual(product.category.name, 'this is the category')
@@ -56,7 +56,7 @@ class ProductBaseTests(TestCase):
             image.product.name, 'product name'
         )
         self.assertEqual(
-            image.cover.name[22:32], 'image_test',
+            image.cover.name[16:26], 'image_test',
         )
         self.assertTrue(isinstance(image, Image))
 
