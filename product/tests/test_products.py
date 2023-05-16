@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.test import override_settings
 from django.urls import reverse, resolve, ResolverMatch
 from django.http import HttpResponse
-from product.views import ProductList
+from product import views
 from .product_test_base import make_product_range
 import shutil
 import contextlib
@@ -34,7 +34,7 @@ class ProductTests(TestCase):
         url: str = reverse('product:products')
         response: ResolverMatch = resolve(url)
 
-        self.assertEqual(ProductList, response.func.view_class)
+        self.assertEqual(views.product_list, response.func)
 
     def test_products_load_correct_template(self) -> None:
         url: str = reverse('product:products')
