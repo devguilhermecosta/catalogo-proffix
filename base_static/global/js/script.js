@@ -1,5 +1,6 @@
 "use strict";
 
+// modal
 let imgModal = document.querySelector('#img-modal');
 const images = document.querySelectorAll('.C-detail_gallery_img');
 

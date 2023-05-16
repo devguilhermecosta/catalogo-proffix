@@ -1,0 +1,16 @@
+<section class="C-pagination">
+  <div class="C-step-links">
+      {% if products.has_previous %}
+        <a href="?page=1">primeira página - </a>
+        <a class="C-pagination_previous_page" href="?page={{ products.previous_page_number }}">página anterior - </a>
+      {% endif %}
+  
+      <span>
+        página {{ products.number }} de {{ products.paginator.num_pages }}
+      </span>
+  
+      {% if products.has_next %}
+        <a href="?page={{ products.next_page_number }}"> - próxima página</a>
+      {% endif %}
+  </div>
+</section>

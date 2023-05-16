@@ -25,9 +25,11 @@ html, body {
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
   'header'
+  'filter'
   'main'
   'footer';
   background-color: var(--red_two);
+  position: relative;
 }
 
 /* start header */
@@ -50,6 +52,7 @@ html, body {
   height: 25px;
   width: 30px;
   background-color: var(--red_two);
+  z-index: 100000;
 }
 
 .C-bar {
@@ -99,7 +102,7 @@ html, body {
 }
 
 #menu-m:checked ~ .C-menu_mobile {
-  position: absolute;
+  position: fixed;
   animation-name: menu-mobile;
   animation-timing-function: ease;
   animation-fill-mode: forwards;
@@ -140,6 +143,78 @@ html, body {
 }
 /* end header */
 
+/* start category filter */
+.C-filter {
+  display: flex;
+  justify-content: end;
+  background-color: var(--red_two);
+  text-align: right;
+  position: relative;
+  height: fit-content;
+}
+
+.C-filter_label {
+  display: block;
+}
+
+.C-filter_button {
+  border: none;
+  outline: none;
+  color: var(--white);
+  background-color: var(--red_one);
+  text-transform: uppercase;
+  font-size: 14px;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.C-filter_ul {
+  width: fit-content;
+  padding: 5px;
+  background-color: var(--red_one);
+  list-style: none;
+  position: absolute;
+  top: 28px;
+  right: 0;
+  width: 0;
+  white-space: nowrap;
+  display: none;
+  overflow: hidden;
+  z-index: 10000;
+}
+
+#C-filter_input {
+  display: none;
+}
+
+#C-filter_input:checked ~ .C-filter_ul {
+  display: block;
+  animation-name: open-filter;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-duration: 300ms;
+}
+
+.C-filter_li {
+  margin: 5px 0;
+}
+
+.C-filter_link {
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 300;
+  transition: all 300ms ease;
+}
+
+.C-filter_link:hover {
+  text-decoration: underline;
+}
+
+/* end category filter */
 
 /* start main */
 .C-main {
@@ -219,6 +294,14 @@ html, body {
 .C-product_link:hover {
   color: var(--white);
   background-color: var(--black);
+}
+
+.C-product_message {
+  text-align: center;
+  color: var(--white);
+  position: absolute;
+  top: 50%;
+  padding: 0 10px;
 }
 
 .C-detail_center {
@@ -343,6 +426,34 @@ html, body {
 }
 /* end main */
 
+/* start pagination */
+.C-pagination {
+  display: block;
+  text-align: center;
+  margin: 0 5px;
+  margin-bottom: 10px;
+}
+
+.C-step-links {
+  margin: 0 auto;
+  width: fit-content;
+  border: 0.5px solid var(--white);
+  padding: 5px 10px;
+}
+
+.C-step-links a, .C-step-links span {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--white);
+  font-size: 14px;
+}
+
+.C-pagination_previous_page {
+  font-weight: 300;
+}
+
+/* end pagination */
+
 /* start footer */
 .C-footer {
   background-color: var(--red_one);
@@ -378,6 +489,14 @@ html, body {
 @keyframes open-menu {
   from {width: 0}
   to {width: 50%;}
+}
+
+@keyframes open-filter {
+  from {width: 0}
+  to {
+    width: 50%;
+    min-width: 50%;
+  }
 }
 
 @media screen and (min-width: 400px) {

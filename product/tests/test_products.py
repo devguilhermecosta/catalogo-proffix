@@ -54,3 +54,7 @@ class ProductTests(TestCase):
         self.assertIn('name of product 0', content)
         self.assertIn('name of product 1', content)
         self.assertIn('name of product 2', content)
+        self.fail('testar toda a url de categoria '
+                  'testar todos os context processors '
+                  'melhorar a função de formatar número do whatsapp'
+                  )

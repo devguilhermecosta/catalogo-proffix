@@ -17,7 +17,8 @@
           <a href="{% url 'product:detail' product.slug %}" class="C-product_link">saiba mais</a>
       </div>
     {% empty %}
-      <p>No products found</p>
-  {% endfor %}
+      <p class="C-product_message">No momento estamos sem produtos disponíveis nesta categoria</p>
+    {% endfor %}
   </section>
+  {% include 'global/partials/_paginator.html' %}
 {% endblock content %}
