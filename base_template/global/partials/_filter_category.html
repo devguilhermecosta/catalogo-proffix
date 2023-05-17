@@ -1,6 +1,9 @@
 <input type="checkbox" name="" id="C-filter_input">
 <label for="C-filter_input" class="C-filter_button">categorias</label>
 <ul class="C-filter_ul C-filter_ul__desabled">
+  <li class="C-filter_li">
+    <a href="/" class="C-filter_link">todos</a>
+  </li>
   {% for category in categories %}
     <li class="C-filter_li">
       <a href="{% url 'product:category' category.slug %}" class="C-filter_link">{{ category.name }}</a>

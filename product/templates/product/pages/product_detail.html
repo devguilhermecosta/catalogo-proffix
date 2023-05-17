@@ -9,11 +9,15 @@
   <section class="C-detail_center">
     <section class="C-detail">
       <section class="C-detail_all_images">
+        <!-- modal -->
+        {% include 'product/partials/_modal.html' %}
+
         <div class="C-detail_c_img">
           {% if product.cover %}
-            <img  id="img-modal" src="{{ product.cover.url }}" alt="image of {{ product.name }}" class="C-detail_img">
+            <img  id="C-modal_defaul_img" src="{{ product.cover.url }}" alt="image of {{ product.name }}" class="C-detail_img">
           </div>
           {% endif %}
+
         <div class="C-detail_gallery">
           {% for image in images %}
             {% if image.cover %}
@@ -34,7 +38,9 @@
             {{ product.description }}
           </p>
         </div>
+
         <a href="https://wa.me/{{ information.whatsapp|format }}?text=Olá Proffix, estou interessado(a) no produto {{ product.name }} - {{ link }}" target="_blank" class="C-detail_link">estou interessado</a>
+
       </div>
     </section>
   </section>
