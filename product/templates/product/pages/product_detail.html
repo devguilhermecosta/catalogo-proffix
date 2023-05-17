@@ -10,16 +10,18 @@
     <section class="C-detail">
       <section class="C-detail_all_images">
         <div class="C-detail_c_img">
-          <img  id="img-modal" src="{{ product.cover.url }}" alt="image of {{ product.name }}" class="C-detail_img">
-        </div>
+          {% if product.cover %}
+            <img  id="img-modal" src="{{ product.cover.url }}" alt="image of {{ product.name }}" class="C-detail_img">
+          </div>
+          {% endif %}
         <div class="C-detail_gallery">
-          {% if images %}
-            {% for image in images %}
+          {% for image in images %}
+            {% if image.cover %}
               <div class="C-detail_aditional_img">
                 <img class="C-detail_gallery_img" src="{{ image.cover.url }}" alt="image of {{ product.name }}">
               </div>
-            {% endfor %}
-          {% endif %}
+            {% endif %}
+          {% endfor %}
         </div>
       </section>
     

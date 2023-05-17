@@ -1,41 +1,5 @@
 from unittest import TestCase
-import math
-
-
-def make_pagination_range(page_range,
-                          qty_pages,
-                          current_page,
-                          ):
-    middle_range = math.ceil(qty_pages / 2)
-    start_range = current_page - middle_range
-    stop_range = current_page + middle_range
-    total_pages = len(page_range)
-
-    if start_range < 0:
-        start_range = 0
-        stop_range = qty_pages
-
-    if stop_range >= total_pages:
-        start_range = total_pages - qty_pages
-        stop_range = total_pages
-
-    if total_pages < qty_pages:
-        start_range = 0
-        stop_range = total_pages
-
-    pagination = page_range[start_range:stop_range]
-
-    return {
-        'pagination': pagination,
-        'page_range': page_range,
-        'qty_pages': qty_pages,
-        'current_page': current_page,
-        'total_pages': total_pages,
-        'start_range': start_range,
-        'stop_range': stop_range,
-        'has_previous_page': current_page > middle_range,
-        'has_next_page': current_page < total_pages,
-    }
+from utils.pagination.pagination import make_pagination_range
 
 
 class TestMakePaginationRange(TestCase):
@@ -45,7 +9,7 @@ class TestMakePaginationRange(TestCase):
                                            current_page=1,
                                            )
 
-        self.assertEqual(pagination, [1, 2, 3, 4])
+        self.assertEqual(pagination['pagination'], [1, 2, 3, 4])
 
     def test_pagination_range_is_static_when_current_page_is_less_than_middle_page(self) -> None:  # noqa: E501
         pagination_0 = make_pagination_range(list(range(1, 2)),
@@ -77,6 +41,7 @@ class TestMakePaginationRange(TestCase):
                                              current_page=3,
                                              )
         self.assertEqual(pagination_4['pagination'], [2, 3, 4, 5])
+        self.assertTrue(pagination_4['first_page_out_of_range'])
 
         pagination_5 = make_pagination_range(list(range(1, 20)),
                                              qty_pages=4,
@@ -96,6 +61,8 @@ class TestMakePaginationRange(TestCase):
                                              current_page=5,
                                              )
         self.assertEqual(pagination_0['pagination'], [4, 5, 6, 7])
+        self.assertTrue(pagination_0['first_page_out_of_range'])
+        self.assertTrue(pagination_0['last_page_out_of_range'])
 
         pagination_1 = make_pagination_range(list(range(1, 10)),
                                              qty_pages=4,
@@ -126,6 +93,7 @@ class TestMakePaginationRange(TestCase):
                                              current_page=10,
                                              )
         self.assertEqual(pagination_4['pagination'], [6, 7, 8, 9])
+        self.assertTrue(pagination_4['first_page_out_of_range'])
 
     def test_pagination_range_load_correct_qty_of_pages_if_page_range_less_than_qty_pages(self) -> None:  # noqa: E501
         pagination_0 = make_pagination_range(list(range(1, 2)),

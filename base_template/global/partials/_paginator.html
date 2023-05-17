@@ -1,16 +1,25 @@
-<section class="C-pagination">
-  <div class="C-step-links">
-      {% if products.has_previous %}
-        <a href="?page=1">primeira página - </a>
-        <a class="C-pagination_previous_page" href="?page={{ products.previous_page_number }}">página anterior - </a>
-      {% endif %}
+{% if products.has_other_pages %}
+  <section class="C-pagination">
+    <div class="C-step-links">
+      
+        {% if pagination_range.first_page_out_of_range %}
+          <a href="?page=1">1</a>
+          <span>...</span>
+        {% endif %}
   
-      <span>
-        página {{ products.number }} de {{ products.paginator.num_pages }}
-      </span>
-  
-      {% if products.has_next %}
-        <a href="?page={{ products.next_page_number }}"> - próxima página</a>
-      {% endif %}
-  </div>
-</section>
+        {% for page in pagination_range.pagination %}
+          {% if page == pagination_range.current_page %}
+            <a href="?page={{ page }}" class="C-pagination_c_page">{{ page }}</a>
+          {% else %}
+            <a href="?page={{ page }}">{{ page }}</a>
+          {% endif %}
+        {% endfor %}
+
+        {% if pagination_range.last_page_out_of_range %}
+          <span>...</span>
+          <a href="?page={{ pagination_range.total_pages }}">{{ pagination_range.total_pages }}</a>
+        {% endif %}
+
+    </div>
+  </section>
+{% endif %}
