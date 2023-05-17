@@ -1,0 +1,9 @@
+@media screen and (min-width: 840px) {
+    .C-body {
+      grid-template-columns: 1fr !important;
+      grid-template-areas:
+      'header header'
+      'main main'
+      'footer footer' !important;
+    }
+}

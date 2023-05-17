@@ -456,6 +456,65 @@ body::-webkit-scrollbar-thumb {
 .C-detail_link:hover {
   opacity: 0.8;
 }
+
+.C-information {
+  background-color: var(--white);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.C-information_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.C-information h2 {
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.C-information_information {
+  max-width: 450px;
+  margin-bottom: 30px;
+}
+
+.C-information_information h2 {
+  margin-top: 25px;
+}
+
+.C-information_docs {
+  max-width: 450px;
+}
+
+.C-information_docs h2 {
+  text-align: center;
+}
+
+.C-information_docs a {
+  display: block;
+  width: 100%;
+  padding: 2px 5px;
+  text-align: center;
+  text-transform: capitalize;
+  text-decoration: none;
+  font-weight: 400;
+  background-color: var(--gray);
+  color: var(--black);
+  margin: 5px 0;
+  transition: all 300ms ease;
+}
+
+.C-information_docs a:hover {
+  background-color: gray;
+  color: var(--white);
+}
 /* end main */
 
 /* start modal */
@@ -583,7 +642,6 @@ body::-webkit-scrollbar-thumb {
 .C-footer p:not(:last-child) {
   text-transform: capitalize;
 }
-
 /* end footer */
 
 @keyframes menu-mobile {
@@ -609,7 +667,6 @@ body::-webkit-scrollbar-thumb {
     width: 100%;
     max-width: fit-content;
   }
-
 }
 
 @media screen and (min-width: 400px) {
@@ -627,7 +684,6 @@ body::-webkit-scrollbar-thumb {
     max-width: 150px;
   }
 }
-
 
 @media screen and (min-width: 840px) {
   .C-body {
@@ -711,6 +767,8 @@ body::-webkit-scrollbar-thumb {
 
   .C-filter {
     height: 100%;
+    width: 100%;
+    position: relative;
   }
 
   .C-filter_button {
@@ -726,6 +784,12 @@ body::-webkit-scrollbar-thumb {
     height: 100%;
     text-align: left;
     background-color: var(--red_three);
+  }
+
+  .C-information_wrapper {
+    flex-direction: row;
+    align-items: flex-start;
+    column-gap: 30px;
   }
 
   .C-footer {

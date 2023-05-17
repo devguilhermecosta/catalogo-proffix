@@ -3,7 +3,9 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  {% include 'global/partials/_head.html' %}
+  {% block head %}
+    {% include 'global/partials/_head.html' %}
+  {% endblock head %}
   <title>{% block title %}{% endblock title %}</title>
 </head>
 <body class="C-body">
@@ -13,9 +15,7 @@
   </header>
 
   <!-- category filter -->
-  <section class="C-filter">
-    {% include 'global/partials/_filter_category.html' %}
-  </section>
+  {% block filter %}{% endblock filter %}
 
   <!-- main -->
   <main class="C-main">

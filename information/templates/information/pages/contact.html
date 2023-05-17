@@ -1,0 +1,40 @@
+{% extends 'global/pages/base_contact.html' %}
+
+{% block title %}
+  Contato |
+{% endblock title %}
+
+{% block content %}
+  <section class="C-information">
+
+    <section class="C-information_wrapper">
+      <section class="C-information_information">
+        {% if information %}
+          <p>{{ information.about }}</p>
+          <div class="C-information_contact">
+            <h2>contato:</h2>
+            <p>{{ information.phone }}</p>
+            <p>{{ information.fax }}</p>
+            <p>{{ information.email }}</p>
+          </div>
+        {% else %}
+          <p>informações indisponíveis no momento</p>
+        {% endif %}
+      </section>
+
+      <section class="C-information_docs">
+        {% if docs %}
+          <div class="C-docs">
+            <h2>documentos:</h2>
+            <a target="_blank" href="{{ docs.afe.url }}">autorização de funcionamento</a>
+            <a target="_blank" href="{{ docs.cnpj.url }}">cartão cnpj</a>
+            <a target="_blank" href="{{ docs.crt.url }}">certificado de responsabilidade técnica</a>
+          </div>
+        {% else %}
+          <p>documentos não disponíveis</p>
+        {% endif %}
+      </section>
+    </section>
+
+  </section>
+{% endblock content %}

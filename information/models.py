@@ -18,7 +18,7 @@ class Information(models.Model):
 
 
 class Docs(models.Model):
-    local_upload = 'media/docs/'
+    local_upload = 'docs/'
     company = models.ForeignKey(Information, on_delete=models.CASCADE)
     afe = models.FileField(upload_to=local_upload,
                            blank=True,
