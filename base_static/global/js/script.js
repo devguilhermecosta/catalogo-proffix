@@ -31,7 +31,8 @@ const buttonCloseModal = document.querySelector('#C-modal_close');
         modalImg.setAttribute('src', path);
         modal.classList.toggle('is_disabled');
         modal.classList.toggle('modal-open');
-    })
+        count = 0;
+    });
 
     buttonCloseModal.addEventListener("click", () => {
         modal.classList.toggle('is_disabled');
