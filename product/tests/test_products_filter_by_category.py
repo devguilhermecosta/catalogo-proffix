@@ -7,6 +7,7 @@ from product.tests.product_test_base import (
     make_product_range,
     make_product,
 )
+from unittest.mock import patch
 import contextlib
 import shutil
 
@@ -16,30 +17,34 @@ TEST_DIR = 'test_data'
 
 @override_settings(MEDIA_ROOT=(TEST_DIR + '/media'))
 class ProductsFilteredByCategoryTests(TestCase):
+    def setUp(self) -> None:
+        self.path = 'product:category'
+        return super().setUp()
+
     def tearDown(self) -> None:
         with contextlib.suppress(OSError):
             shutil.rmtree(TEST_DIR)
         return super().tearDown()
 
     def test_product_category_url_is_correct(self) -> None:
-        url: str = reverse('product:category', args=('ligamentar', ))
+        url: str = reverse(self.path, args=('ligamentar', ))
         self.assertEqual(url, '/produtos/ligamentar/')
 
     def test_product_category_loads_correct_view_func(self) -> None:
         response: ResolverMatch = resolve(
-            reverse('product:category', args=('ligamentar', ))
+            reverse(self.path, args=('ligamentar', ))
         )
         self.assertEqual(response.func, views.product_category)
 
     def test_product_category_status_code_200(self) -> None:
         response: HttpResponse = self.client.get(
-            reverse('product:category', args=('my-category',))
+            reverse(self.path, args=('my-category',))
         )
         self.assertEqual(response.status_code, 200)
 
     def test_product_category_loads_correct_template(self) -> None:
         response: HttpResponse = self.client.get(
-            reverse('product:category', args=('ligamentar', ))
+            reverse(self.path, args=('ligamentar', ))
         )
         self.assertTemplateUsed(response, 'product/pages/products.html')
 
@@ -59,14 +64,29 @@ class ProductsFilteredByCategoryTests(TestCase):
 
         ''' make request with slug "my-category" '''
         response = self.client.get(
-            reverse('product:category', args=('my-category', ))
+            reverse(self.path, args=('my-category', ))
         )
 
         ''' we expect 4 objects '''
         products_lenght = len(response.context['products'])
 
         self.assertEqual(products_lenght, 4)
-        self.fail('testar todos os context processors '
-                  'melhorar a função de formatar número do whatsapp '
-                  'testar a paginação '
-                  )
+
+    def test_products_category_page_is_paginated(self) -> None:
+        ''' created 16 product objects '''
+        category = make_category(name='category test', slug='category-test')
+        make_product_range(16, category=category)
+
+        path = 'product.views.PER_PAGE'
+
+        ''' test with 4 products per page '''
+        with patch(path, new=4):
+            response: HttpResponse = self.client.get(
+                    reverse(self.path, args=('category-test', ))
+                )
+            products_length = len(response.context['products'])
+            total_pages = (
+                response.context['pagination_range'].get('total_pages')
+            )
+            self.assertEqual(products_length, 4)
+            self.assertEqual(total_pages, 4)

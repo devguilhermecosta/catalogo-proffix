@@ -3,6 +3,10 @@ from django.urls import reverse
 from django.http import HttpRequest, HttpResponse
 from product.models import Product, Image
 from utils.pagination.pagination import make_pagination
+import os
+
+
+PER_PAGE = int(os.environ.get('PER_PAGE', 8))
 
 
 def product_list(request: HttpRequest) -> HttpResponse:
@@ -10,7 +14,7 @@ def product_list(request: HttpRequest) -> HttpResponse:
 
     page_obj, pagination_range = make_pagination(request,
                                                  products,
-                                                 8,
+                                                 PER_PAGE,
                                                  )
 
     return render(
@@ -46,11 +50,11 @@ def product_detail(request: HttpRequest, slug: str):
 
 
 def product_category(request, slug) -> HttpResponse:
-    products = Product.objects.filter(category__slug=slug)
+    products = Product.objects.filter(category__slug=slug).order_by('-id')
 
     page_object, pagination_range = make_pagination(request,
                                                     products,
-                                                    8)
+                                                    PER_PAGE)
 
     return render(
         request,

@@ -6,6 +6,7 @@ from product.tests.product_test_base import make_image
 from product.models import Image
 from product import views
 from .product_test_base import make_product
+from information.tests.base_information import make_information
 import shutil
 import contextlib
 
@@ -115,3 +116,19 @@ class ProductDetailsTests(TestCase):
             'image of product test 2',
             content,
         )
+
+    def test_products_detail_render_information_context_processor_in_footer(self) -> None:  # noqa: E501
+        ''' create a instance of information object and product object'''
+        make_information()
+        make_product(name='product test', slug='product-test')
+
+        response = self.client.get(
+            reverse('product:detail', args=('product-test', ))
+        )
+
+        self.assertEqual(response.context['information'].name,
+                         'information name',
+                         )
+        self.assertIn('information name',
+                      response.content.decode('utf-8'),
+                      )
