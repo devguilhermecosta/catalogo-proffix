@@ -1,10 +1,19 @@
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-from .environement import BASE_DIR
+from dotenv import load_dotenv
+import os
+
+
+load_dotenv()
+
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': os.environ.get('DATABASE_ENGINE'),
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'DATABASE_USER': os.environ.get('DATABASE_USER'),
+        'DATABASE_PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'DATABASE_HOST': os.environ.get('DATABASE_HOST'),
+        'DATABASE_PORT': os.environ.get('DATABASE_PORT'),
+        }
 }
