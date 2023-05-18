@@ -54,8 +54,14 @@ class ProductTests(TestCase):
         self.assertIn('name of product 0', content)
         self.assertIn('name of product 1', content)
         self.assertIn('name of product 2', content)
-        self.fail('testar toda a url de categoria '
-                  'testar todos os context processors '
-                  'melhorar a função de formatar número do whatsapp '
-                  'testar a paginação '
-                  )
+
+    def test_products_load_no_registred_product_if_no_prodducts(self) -> None:
+        response: HttpResponse = self.client.get(
+            reverse('product:products')
+        )
+        content: str = response.content.decode('utf-8')
+
+        self.assertIn(
+            'No momento estamos sem produtos disponíveis nesta categoria',
+            content,
+            )

@@ -20,10 +20,17 @@ def __create_simple_image() -> SimpleUploadedFile:
     return simple_image
 
 
-def make_category() -> Category:
+def make_category(**kwargs) -> Category:
+    """optional params:
+
+        name, slug
+
+    Returns:
+        Category object
+    """
     category_data: dict = {
-        'name': 'this is the category',
-        'slug': 'this-is-the-category'
+        'name': kwargs.pop('name', 'this is the category'),
+        'slug': kwargs.pop('slug', 'this-is-the-category'),
     }
     category = Category.objects.create(**category_data)
 
@@ -42,25 +49,29 @@ def make_product(category=None, **kwargs) -> Product:
     """
     product_data: dict = {
         'name': kwargs.pop('name', 'product name'),
-        'category': make_category() if category is None else category,
+        'category': category if category is not None else make_category(),
         'slug': kwargs.pop('slug', 'product-slug'),
         'cover': __create_simple_image(),
         'description': kwargs.pop('description', 'product description'),
         'available': kwargs.pop('available', True),
     }
     new_product = Product.objects.create(**product_data)
+    new_product.save()
 
     return new_product
 
 
-def make_product_range(number_of_objects: int):
+def make_product_range(number_of_objects: int, category=None):
     """make a range of Product objects
 
     Args:
         number_of_objects (int): number of need objects
+    Optional kwargs:
+        category: Instance of Category
     """
     for i in range(number_of_objects):
         make_product(
+            category=category if category is not None else category,
             name=f'name of product {i}',
             slug=f'slug-of-product-{i}',
             description=f'description-of-product-{i}'
@@ -73,6 +84,7 @@ def make_image(product=None, **kwargs) -> Image:
     """
     image_data: dict = {
         'product': make_product(
+            category=kwargs.pop('category', None),
             name=kwargs.pop('product_name', 'product name'),
             slug=kwargs.pop('product_slug', 'product-slug')
             ) if product is None else product,

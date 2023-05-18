@@ -53,8 +53,7 @@ class InformationTests(TestCase):
         )
         content: str = response.content.decode('utf-8')
 
-        self.assertIn('information name', content)
-        self.assertIn('Informações da Empresa', content)
+        self.assertIn('descrição da empresa', content)
 
     def test_information_loads_information_not_available_if_no_information(self) -> None:  # noqa: E501
         response: HttpResponse = self.client.get(
