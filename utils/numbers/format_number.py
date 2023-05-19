@@ -2,7 +2,7 @@ import string
 
 
 def format_phone_number(number: str) -> str:
-    other_symbols = '¨'
+    other_symbols = '¨, " "'
     all_numbers_and_symbols = (
         string.punctuation + string.ascii_letters + other_symbols)
 
