@@ -235,6 +235,9 @@ body::-webkit-scrollbar-thumb {
 /* start main */
 .C-main {
   grid-area: main;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .C-footer {
@@ -368,7 +371,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 .C-detail_c_img > img {
-  height: 100%;
   max-width: 100%;
 }
 

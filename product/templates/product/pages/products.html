@@ -16,7 +16,9 @@
       <div class="C-product">
           <div class="C-product_c_img">
             {% if product.cover %}
-              <img src="{{ product.cover.url }}" alt="image of {{ product.name }}">
+              <a href="{% url 'product:detail' product.slug %}">
+                <img src="{{ product.cover.url }}" alt="image of {{ product.name }}">
+              </a>
             {% endif %}
           </div>
           <h1 class="C-product_name">{{ product.name }}</h1>
