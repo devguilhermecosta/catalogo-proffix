@@ -16,7 +16,7 @@ def resize_image(full_path: str, new_width: int = 920) -> None:
     new_height: int = round((new_width * original_h) / original_w)
     new_image = image_conversion.resize(
         (new_width, new_height),
-        resample=Image.Resampling.LANCZOS,
+        resample=Imgpil.Resampling.LANCZOS,
         )
     new_image.save(
         full_path,
