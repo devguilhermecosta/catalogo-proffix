@@ -1,4 +1,8 @@
+from dotenv import load_dotenv
 import os
+
+
+load_dotenv()
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
