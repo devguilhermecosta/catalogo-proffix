@@ -5,11 +5,11 @@ import os
 
 DATABASES = {
     'default': {
-        'ENGINE': str(os.environ.get('DATABASE_ENGINE')),
-        'NAME': str(os.environ.get('DATABASE_NAME')),
-        'DATABASE_USER': str(os.environ.get('DATABASE_USER')),
-        'DATABASE_PASSWORD': str(os.environ.get('DATABASE_PASSWORD')),
-        'DATABASE_HOST': str(os.environ.get('DATABASE_HOST')),
-        'DATABASE_PORT': str(os.environ.get('DATABASE_PORT')),
+        'ENGINE': os.environ.get('DATABASE_ENGINE'),
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'DATABASE_USER': os.environ.get('DATABASE_USER'),
+        'DATABASE_PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'DATABASE_HOST': os.environ.get('DATABASE_HOST'),
+        'DATABASE_PORT': os.environ.get('DATABASE_PORT'),
         }
 }
