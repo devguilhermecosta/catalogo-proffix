@@ -34,7 +34,7 @@ def product_detail(request: HttpRequest, slug: str):
     images: Image = Image.objects.filter(
         product=product,
     )
-    link = 'https://127.0.0.1:8000' + reverse(
+    link = 'https://catalogo.proffixortopedia.com' + reverse(
         'product:detail', args=(product.slug,)
         )
 
