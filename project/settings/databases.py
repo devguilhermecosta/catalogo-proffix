@@ -1,13 +1,10 @@
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+from dotenv import load_dotenv
+
 import os
 
-<<<<<<< HEAD
-=======
-
 load_dotenv()
-
->>>>>>> f1e8ba016923fe57ff9ec4d37ed7a2a877e7a2b0
 
 DATABASES = {
     'default': {
