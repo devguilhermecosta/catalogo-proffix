@@ -238,6 +238,7 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: rgb(231, 220, 220);
 }
 
 .C-footer {
@@ -267,6 +268,7 @@ body::-webkit-scrollbar-thumb {
   height: auto;
   padding: 3px;
   background-color: var(--white);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.281);
 }
 
 .C-product_c_img {
@@ -638,7 +640,7 @@ body::-webkit-scrollbar-thumb {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--red_one);
+  background-color: var(--red_two);
   color: var(--white);
   text-align: center;
   padding: 2px 5px;
@@ -681,18 +683,25 @@ body::-webkit-scrollbar-thumb {
 }
 
 @media screen and (min-width: 400px) {
-  .C-products {
-    justify-content: flex-start;
-  }
-
   .C-product {
-    flex-basis: 30%;
+    flex-basis: 40%;
   }
 }
 
 @media screen and (min-width: 600px) {
   .C-logo {
     max-width: 150px;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .C-products {
+    align-content: stretch;
+    justify-content: flex-start;
+  }
+
+  .C-product {
+    flex-basis: 30%;
   }
 }
 
@@ -767,7 +776,6 @@ body::-webkit-scrollbar-thumb {
   }
 
   .C-products {
-    padding-top: 0;
     margin-left: 30px;
     column-gap: 35px;
   }
