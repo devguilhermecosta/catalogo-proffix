@@ -45,7 +45,8 @@
             {{ product.description }}
           </p>
           {% if product.price %}
-            <p class="C-detail_price">{{ product.price|format_price }}</p>
+            <p class="C-detail_price">valor: {{ product.price|format_price }}
+            </p>
           {% endif %}
         </div>
 

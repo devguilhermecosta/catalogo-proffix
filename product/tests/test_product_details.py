@@ -7,6 +7,7 @@ from product.models import Image
 from product import views
 from .product_test_base import make_product
 from information.tests.base_information import make_information
+from decimal import Decimal
 import shutil
 import contextlib
 
@@ -120,7 +121,9 @@ class ProductDetailsTests(TestCase):
     def test_products_detail_render_information_context_processor_in_footer(self) -> None:  # noqa: E501
         ''' create a instance of information object and product object'''
         make_information()
-        make_product(name='product test', slug='product-test', price='1250')
+        make_product(name='product test',
+                     slug='product-test',
+                     price=Decimal(12500.85))
 
         response = self.client.get(
             reverse('product:detail', args=('product-test', ))
@@ -132,6 +135,6 @@ class ProductDetailsTests(TestCase):
         self.assertIn('information name',
                       response.content.decode('utf-8'),
                       )
-        self.assertIn('1250',
+        self.assertIn('R$ 12500,85',
                       response.content.decode('utf-8'),
                       )
