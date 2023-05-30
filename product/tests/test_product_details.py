@@ -120,7 +120,7 @@ class ProductDetailsTests(TestCase):
     def test_products_detail_render_information_context_processor_in_footer(self) -> None:  # noqa: E501
         ''' create a instance of information object and product object'''
         make_information()
-        make_product(name='product test', slug='product-test')
+        make_product(name='product test', slug='product-test', price='1250')
 
         response = self.client.get(
             reverse('product:detail', args=('product-test', ))
@@ -130,5 +130,8 @@ class ProductDetailsTests(TestCase):
                          'information name',
                          )
         self.assertIn('information name',
+                      response.content.decode('utf-8'),
+                      )
+        self.assertIn('1250',
                       response.content.decode('utf-8'),
                       )

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.conf import settings
 from PIL import Image as Imgpil
+from decimal import Decimal
 import os
 
 
@@ -56,6 +57,12 @@ class Product(models.Model):
                               verbose_name='imagem de apresentação',
                               )
     description = models.TextField(verbose_name='descrição')
+    price = models.DecimalField(max_digits=15,
+                                decimal_places=2,
+                                blank=True,
+                                null=True,
+                                default=Decimal(0.0),
+                                )
     available = models.BooleanField(default=True,
                                     verbose_name='disponível')
 

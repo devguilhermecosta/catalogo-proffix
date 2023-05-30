@@ -1,5 +1,6 @@
 {% extends 'global/pages/base.html' %}
 {% load format_number_whatsapp %}
+{% load format_price %}
 
 {% block title %}
   {{ product.name }} |
@@ -43,6 +44,9 @@
           <p class="C-detail_description">
             {{ product.description }}
           </p>
+          {% if product.price %}
+            <p class="C-detail_price">{{ product.price|format_price }}</p>
+          {% endif %}
         </div>
 
         <a href="https://wa.me/{{ information.whatsapp|format }}?text=Olá Proffix, estou interessado(a) no produto {{ product.name }} - {{ link }}" target="_blank" class="C-detail_link">estou interessado</a>

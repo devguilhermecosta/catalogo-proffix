@@ -2,6 +2,7 @@ from product.models import Product, Category, Image
 from django.core.files.uploadedfile import SimpleUploadedFile
 from .base_exception import ImageNotFoundError
 from pathlib import Path
+from decimal import Decimal
 
 
 def __create_simple_image() -> SimpleUploadedFile:
@@ -42,7 +43,7 @@ def make_product(category=None, **kwargs) -> Product:
 
     Args:
         category = optional instance of category,
-        optional kwargs = name, slug, description, available
+        optional kwargs = name, slug, description, available, price
 
     Returns:
         Product
@@ -53,6 +54,7 @@ def make_product(category=None, **kwargs) -> Product:
         'slug': kwargs.pop('slug', 'product-slug'),
         'cover': __create_simple_image(),
         'description': kwargs.pop('description', 'product description'),
+        'price': kwargs.pop('pripe', Decimal(0.0)),
         'available': kwargs.pop('available', True),
     }
     new_product = Product.objects.create(**product_data)
