@@ -50,7 +50,8 @@ def product_detail(request: HttpRequest, slug: str):
 
 
 def product_category(request, slug) -> HttpResponse:
-    products = Product.objects.filter(category__slug=slug).order_by('-id')
+    products = Product.objects.filter(category__slug=slug,
+                                      available=True).order_by('-id')
 
     page_object, pagination_range = make_pagination(request,
                                                     products,
