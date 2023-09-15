@@ -14,13 +14,11 @@
   <section class="C-products">
     {% for product in products %}
       <div class="C-product">
-        <div class="C-product_c_img">
-          {% if product.cover %}
-            <a href="{% url 'product:detail' product.slug %}">
-              <img src="{{ product.cover.url }}" alt="image of {{ product.name }}">
-            </a>
-          {% endif %}
-        </div>
+        {% if product.cover %}
+          <a class="C-product_image_link" href="{% url 'product:detail' product.slug %}">
+            <img src="{{ product.cover.url }}" alt="image of {{ product.name }}">
+          </a>
+        {% endif %}
         <h1 class="C-product_name">{{ product.name }}</h1>
         <a href="{% url 'product:detail' product.slug %}" class="C-product_link">saiba mais</a>
       </div>
