@@ -36,10 +36,9 @@ body::-webkit-scrollbar-thumb {
 .C-body {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: minmax(100px) 1fr auto;
+  grid-template-rows: 80px auto 120px;
   grid-template-areas:
   'header'
-  'filter'
   'main'
   'footer';
   background-color: var(--red_two);
@@ -62,7 +61,6 @@ body::-webkit-scrollbar-thumb {
 .C-menu_mobile {
   display: block;
   position: relative;
-  top: 30px;
   left: 10px;
   cursor: pointer;
   height: 25px;
@@ -98,11 +96,12 @@ body::-webkit-scrollbar-thumb {
 }
 
 .C-menu_ul {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   bottom: 0;
   max-width: 0px;
+  height: 100vh;
   transition: max-width 600ms ease;
   background-color: var(--black_a);
   list-style: none;
@@ -144,12 +143,13 @@ body::-webkit-scrollbar-thumb {
 }
 
 #menu-m:checked ~ .C-menu_ul {
-  max-width: 600px;
+  max-width: 1200px;
 }
 
 .C-logo {
   width: 100%;
   max-width: 70px;
+  margin-top: -20px;
 }
 
 .C-logo_image {
@@ -159,7 +159,6 @@ body::-webkit-scrollbar-thumb {
 
 /* start category filter */
 .C-filter {
-  grid-area: filter;
   display: flex;
   justify-content: end;
   background-color: var(--red_two);
@@ -182,13 +181,16 @@ body::-webkit-scrollbar-thumb {
   padding: 5px 10px;
   margin-bottom: 5px;
   cursor: pointer;
+  position: absolute;
+  top: 49px;
+  right: 0;
 }
 
 .C-filter_ul {
   background-color: var(--red_two);
   list-style: none;
   position: absolute;
-  top: 30px;
+  top: 79px;
   right: 0;
   white-space: nowrap;
   overflow: hidden;
@@ -209,7 +211,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #C-filter_input:checked ~ .C-filter_ul {
-  min-height: 100vh;
+  min-height: 150vh;
 }
 
 .C-filter_li {
@@ -529,7 +531,18 @@ body::-webkit-scrollbar-thumb {
 
 /* start modal */
 .C-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 1000000;
+  width: 0px;
+  height: 0px;
+  transition: all 800ms ease;
+  overflow: hidden;
 }
 
 .C-modal button {
@@ -570,15 +583,13 @@ body::-webkit-scrollbar-thumb {
 }
 
 .modal-open {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
+  opacity: 1;
   width: 100%;
   height: 100%;
   padding: 0 5px;
   top: 0;
   left: 0;
+  transform: translate(0, 0);
   background-color: rgba(0, 0, 0, 0.897);
 }
 
@@ -663,18 +674,6 @@ body::-webkit-scrollbar-thumb {
 }
 /* end footer */
 
-@keyframes menu-mobile {
-  from {
-    top: 14px;
-    left: 0;
-  }
-
-  to {
-    top: 14px;
-    left: 50%;
-  }
-}
-
 @media screen and (min-width: 360px) {
   .C-products {
     grid-template-columns: repeat(2, 1fr);
@@ -686,11 +685,19 @@ body::-webkit-scrollbar-thumb {
   }
 }
 
-@media screen and (min-width: 600px) {
-  .C-logo {
-    max-width: 150px;
+@media screen and (min-width: 478px) {
+  .C-body {
+    grid-template-rows: 80px 1fr 80px;
   }
 
+  .C-footer {
+    flex-direction: row;
+    align-items: flex-start;
+    column-gap: 30px;
+  }
+}
+
+@media screen and (min-width: 600px) {
   .C-products {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -698,20 +705,20 @@ body::-webkit-scrollbar-thumb {
 
 @media screen and (min-width: 840px) {
   .C-body {
-    display: grid;
     grid-template-columns: minmax(250px, 1fr) 8fr;
     grid-template-rows: auto 1fr auto;
     grid-template-areas:
     'header header'
     'filter main'
     'footer footer';
-    background-color: var(--red_two);
-    position: relative;
   }
 
   .C-logo {
     order: 1;
+    margin-top: 0;
+    max-width: 120px;
   }
+
 
   .C-menu {
     width: 100%;
@@ -790,12 +797,6 @@ body::-webkit-scrollbar-thumb {
 
   .modal-open > div {
     min-width: 50vw;
-  }
-
-  .C-footer {
-    flex-direction: row;
-    align-items: flex-start;
-    column-gap: 30px;
   }
 }
 
