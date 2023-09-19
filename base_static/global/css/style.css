@@ -36,7 +36,7 @@ body::-webkit-scrollbar-thumb {
 .C-body {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 80px auto 120px;
+  grid-template-rows: 80px auto 125px;
   grid-template-areas:
   'header'
   'main'
@@ -530,7 +530,7 @@ body::-webkit-scrollbar-thumb {
 
 /* start modal */
 .C-modal {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   opacity: 0;
